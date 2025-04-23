@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Manrope;
+    background: #121212;
+}
+p {
+    margin-bottom: 15px;
+    line-height: 1.75rem;
+    color: #9f9fa9;
+}
+h1,h2,h3,h4,h5,h6 {
+    color: #f5f4f4;
+}
+button:hover {
+    cursor: pointer;
+}
+.c-log {
+    cursor: default;
+}

@@ -1,0 +1,23 @@
+# IDE
+.idea/
+*.sublime-workspace
+*.code-workspace
+
+# Node
+node_modules/
+
+# Кэш и логи
+cache/
+*.log
+access.log
+error.log
+
+# Конфиги и секреты
+includes/config.php
+.env
+
+# Загрузки
+assets/uploads/
+
+# Прочее
+.DS_Store

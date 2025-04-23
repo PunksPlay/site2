@@ -1,0 +1,39 @@
+# Отключение листинга папок
+Options -Indexes
+
+# Включение модуля Rewrite
+RewriteEngine On
+RewriteBase /
+
+# Перенаправление статей с ID
+RewriteRule ^article/([0-9]+)/?$ article.php?id=$1 [L,QSA]
+
+# Перенаправление статей по названию
+RewriteRule ^article/([a-zA-Z0-9\-]+)/?$ article.php?slug=$1 [L,QSA]
+
+# Если файл или папка не существуют, перенаправляем на index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+# Разрешаем доступ только к PHP-файлам
+<FilesMatch "\.(php)$">
+    Require all granted
+</FilesMatch>
+
+# Защита конфиденциальных файлов
+<FilesMatch "\.(env|ini|log|sql|json|config|htaccess)$">
+    Require all denied
+</FilesMatch>
+
+# Кэширование статических файлов
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresDefault "access plus 2 days"
+</IfModule>
