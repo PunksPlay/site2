@@ -111,3 +111,35 @@ function generateSlug($string) {
     // Удаляем все ненужные символы и заменяем пробелы на дефисы
     return preg_replace('/[^a-z0-9\-]+/u', '-', $transliterated);
 }
+
+/**
+ * Форматирует дату-время в виде «28 марта 2025 19:19» на русском
+ *
+ * @param string $datetime Строка с датой из БД, например '2025-04-28 19:19:00'
+ * @return string Пустая строка, если дата некорректна, иначе форматированная
+ */
+function formatDateRu(string $datetime): string
+{
+    $ts = strtotime($datetime);
+    if (!$ts) {
+        // некорректная дата
+        return '';
+    }
+
+    // месяцы в родительном падеже
+    static $months = [
+        1  => 'января',   2  => 'февраля',
+        3  => 'марта',    4  => 'апреля',
+        5  => 'мая',      6  => 'июня',
+        7  => 'июля',     8  => 'августа',
+        9  => 'сентября', 10 => 'октября',
+        11 => 'ноября',   12 => 'декабря'
+    ];
+
+    $day   = date('d', $ts);
+    $month = $months[(int)date('n', $ts)];
+    $year  = date('Y', $ts);
+    $time  = date('H:i', $ts);
+
+    return \"$day $month $year $time\";
+}
