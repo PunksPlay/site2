@@ -120,9 +120,9 @@ include __DIR__ . '/../templates/admin_header.php';
         <table class="min-w-full divide-y divide-neutral-700">
             <thead class="bg-neutral-900">
             <tr>
-                <th class="text-neutral-300 px-4 py-2 text-left">Заголовок</th>
-                <th class="text-neutral-300 px-4 py-2 text-left">Автор</th>
-                <th class="text-neutral-300 px-4 py-2 text-left">Дата</th>
+                <th class="text-neutral-300 px-4 py-2 text-center">Заголовок</th>
+                <th class="text-neutral-300 px-4 py-2 text-center">Автор</th>
+                <th class="text-neutral-300 px-4 py-2 text-center">Дата</th>
                 <th class="text-neutral-300 px-4 py-2 text-center">Закрепл.</th>
                 <th class="text-neutral-300 px-4 py-2 text-center">Действия</th>
             </tr>
@@ -138,12 +138,12 @@ include __DIR__ . '/../templates/admin_header.php';
                     <td class="px-4 py-3 text-neutral-100"><?= htmlspecialchars($art['publication_date']) ?></td>
                     <td class="px-4 py-3 text-center text-neutral-100"><?= $art['pinned']? '✔':''?></td>
                     <td class="px-4 py-3 text-center space-x-2">
-                        <a href="edit_article.php?id=<?= $art['article_id'] ?>" class="text-sky-400 hover:text-sky-200">Ред.</a>
-                        <a href="?delete=<?= $art['article_id'] ?>" class="text-red-500 hover:text-red-300" onclick="return confirm('Удалить статью?')">Удал.</a>
+                        <a href="edit_article.php?id=<?= $art['article_id'] ?>" class="text-sky-400 hover:text-sky-200"><i class="bi bi-pencil-square"></i></a>
+                        <a href="?delete=<?= $art['article_id'] ?>" class="text-red-500 hover:text-red-300" onclick="return confirm('Удалить статью?')"><i class="bi bi-trash3"></i></a>
                         <?php if ($art['pinned']): ?>
                             <a href="?unpin=<?= $art['article_id'] ?>" class="text-yellow-400 hover:text-yellow-300">Откр.</a>
                         <?php else: ?>
-                            <a href="?pin=<?= $art['article_id'] ?>" class="text-green-400 hover:text-green-300">Закр.</a>
+                            <a href="?pin=<?= $art['article_id'] ?>" class="text-green-400 hover:text-green-300"><i class="bi bi-pin-angle-fill"></i></a>
                         <?php endif; ?>
                     </td>
                 </tr>

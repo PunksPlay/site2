@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Управление статьями</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.tiny.cloud/1/ffr2p8qybp4euxorx4oqmr5v90v2gan5gfeogo13v4og0fao/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script><script src="../assets/js/tinymce_init.js"></script>
 </head>
 <body class="bg-neutral-900 text-neutral-100 min-h-screen">
@@ -14,7 +15,7 @@
         <nav class="flex space-x-4">
             <a href="add_article.php" class="text-neutral-300 hover:text-neutral-100 transition">Добавить статью</a>
             <a href="articles.php" class="text-neutral-300 hover:text-neutral-100 transition">Статьи</a>
-            <a href="categories.php" class="text-neutral-300 hover:text-neutral-100 transition">Рубрики</a>
+            <a href="categories.php" class="text-neutral-300 hover:text-neutral-100 transition">Категории</a>
             <a href="logout.php" class="text-neutral-300 hover:text-neutral-100 transition">Выйти</a>
         </nav>
     </div>
