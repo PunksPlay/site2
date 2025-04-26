@@ -100,3 +100,4 @@ function formatDateRu(string $datetime): string
     $time  = date('H:i', $ts);
     return "$day $month $year $time";
 }
+?>
