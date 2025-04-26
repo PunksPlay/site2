@@ -2,47 +2,78 @@
 require_once '../includes/db.php';
 require_once '../includes/functions.php';
 
+// Получаем параметры
 $categoryId = intval($_GET['id'] ?? 0);
-$type = $_GET['type'] ?? '';
+$type       = $_GET['type'] ?? '';
 
-if (!in_array($type, ['games', 'movies'])) {
-    die('Некорректный тип категории.');
+// Проверяем корректность
+if (!in_array($type, ['games', 'movies'], true) || $categoryId <= 0) {
+    die('<h1>Некорректный запрос.</h1>');
 }
 
-// Получение категории
-$categoryQuery = "SELECT * FROM categories WHERE category_id = :category_id AND type = :type";
-$category = executeQuery($pdo, $categoryQuery, ['category_id' => $categoryId, 'type' => $type])[0];
+// Берём данные самой категории
+$sql = "SELECT name, type FROM categories WHERE category_id = :id AND type = :type";
+$cat  = executeQuery($pdo, $sql, ['id' => $categoryId, 'type' => $type]);
 
-if (!$category) {
-    die('Категория не найдена.');
+if (empty($cat)) {
+    die('<h1>Категория не найдена.</h1>');
 }
+$category = $cat[0];
 
-// Получение статей по категории
-$articlesQuery = "SELECT a.* 
-                  FROM articles a 
-                  JOIN article_categories ac ON a.article_id = ac.article_id 
-                  WHERE ac.category_id = :category_id 
-                  ORDER BY a.publication_date DESC";
-$articles = executeQuery($pdo, $articlesQuery, ['category_id' => $categoryId]);
+// Заголовок страницы и мета
+$pageTitle       = 'Категория: ' . htmlspecialchars($category['name'], ENT_QUOTES);
+$metaDescription = 'Статьи из раздела «' . htmlspecialchars($category['name'], ENT_QUOTES) . '»';
 
-$pageTitle = 'Категория: ' . htmlspecialchars($category['name'], ENT_QUOTES);
+// Подключаем шапку
 include '../templates/header.php';
 ?>
 
-    <h1>Категория: <?= htmlspecialchars($category['name'], ENT_QUOTES); ?> (<?= $category['type']; ?>)</h1>
+    <div class="flex-1 space-y-8">
 
-<?php if ($articles): ?>
-    <div class="articles-list">
-        <?php foreach ($articles as $article): ?>
-            <div class="article-item">
-                <h3><a href="article.php?id=<?= $article['article_id']; ?>"><?= htmlspecialchars($article['title'], ENT_QUOTES); ?></a></h3>
-                <p><?= htmlspecialchars($article['summary'], ENT_QUOTES); ?></p>
-                <div class="article-date"><?= date('d F Y H:i', strtotime($article['publication_date'])); ?></div>
-            </div>
-        <?php endforeach; ?>
+        <h1 class="text-3xl font-bold">
+            Категория: <?= htmlspecialchars($category['name'], ENT_QUOTES) ?>
+            <span class="text-sm text-neutral-400 ml-2">(<?= $category['type'] === 'games' ? 'Игры' : 'Фильмы' ?>)</span>
+        </h1>
+
+        <?php
+        // Получаем статьи по категории
+        $sql = "
+      SELECT a.title, a.summary, a.slug, a.publication_date
+      FROM articles a
+      JOIN article_categories ac ON a.article_id = ac.article_id
+      WHERE ac.category_id = :id
+      ORDER BY a.publication_date DESC
+    ";
+        $articles = executeQuery($pdo, $sql, ['id' => $categoryId]);
+        ?>
+
+        <?php if (!empty($articles)): ?>
+            <?php foreach ($articles as $article): ?>
+                <article class="border-b border-neutral-800 pb-6">
+                    <div class="text-sm text-neutral-400 mb-1">
+                        <?= formatDateRu($article['publication_date']) ?>
+                    </div>
+
+                    <h2 class="text-lg font-semibold">
+                        <?= htmlspecialchars_decode($article['title'], ENT_QUOTES) ?>
+                    </h2>
+
+                    <div class="text-neutral-300 mt-2">
+                        <?= htmlspecialchars_decode($article['summary'], ENT_QUOTES) ?>
+                    </div>
+
+                    <a href="article.php?slug=<?= htmlspecialchars($article['slug'], ENT_QUOTES) ?>"
+                       class="inline-block mt-2 text-sky-600 hover:underline">
+                        Читать далее →
+                    </a>
+                </article>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="text-neutral-400">Для этой категории статей пока нет.</p>
+        <?php endif; ?>
+
     </div>
-<?php else: ?>
-    <p>Статьи для данной категории отсутствуют.</p>
-<?php endif; ?>
 
-<?php include '../templates/footer.php'; ?>
+<?php
+include '../templates/sidebar.php';
+include '../templates/footer.php';
