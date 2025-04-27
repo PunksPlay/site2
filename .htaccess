@@ -17,7 +17,7 @@ Options -Indexes
 
   # 4) Прописываем явную маршрутизацию search/article/category
   #    ловим и /search.php, и /search
-  RewriteRule ^(search|contact|about|article|category)(?:\.php)?$ public/$1.php [L,QSA]
+  RewriteRule ^(search|contact|about|info|article|category)(?:\.php)?$ public/$1.php [L,QSA]
 
   # 5) Всё остальное — единоразово на public/index.php
   RewriteRule ^.*$ public/index.php [L,QSA]
@@ -31,10 +31,10 @@ Options -Indexes
 # Кеширование статики
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/jpeg    "access plus 1 month"
-  ExpiresByType image/png     "access plus 1 month"
-  ExpiresByType image/gif     "access plus 1 month"
-  ExpiresByType text/css      "access plus 1 week"
+  ExpiresByType image/jpeg    "access plus 1 week"
+  ExpiresByType image/png     "access plus 1 week"
+  ExpiresByType image/gif     "access plus 1 week"
+  ExpiresByType text/css      "access plus 2 days"
   ExpiresByType application/javascript "access plus 1 week"
   ExpiresDefault              "access plus 2 days"
 </IfModule>

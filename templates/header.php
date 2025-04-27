@@ -21,7 +21,7 @@ $movieCategories = $pdo
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= htmlspecialchars($pageTitle) ?></title>
-    <!-- Подключение стилей и favicon -->
+
     <link rel="stylesheet" href="/assets/css/output.css" />
     <link rel="icon" href="/assets/uploads/favicon.png" />
 </head>
@@ -39,21 +39,21 @@ $movieCategories = $pdo
         </button>
 
         <!-- Десктопное меню -->
-        <nav class="hidden md:flex items-center space-x-6">
-            <a href="index.php" class="hover:text-sky-600">Главная</a>
+        <nav class="hidden md:flex items-center space-x-6 font-semibold">
+<!--            <a href="index.php" class="hover:text-sky-600">Главная</a>-->
 
             <!-- Пункт Видеоигры -->
             <div class="relative group">
                 <button class="submenu-button flex items-center space-x-1 focus:outline-none">
-                    <span>Видеоигры</span>
+                    <span class="hover:text-sky-600">Видеоигры</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <ul class="submenu hidden group-hover:block absolute right-0 mt-2 w-44 bg-neutral-800 shadow-lg rounded py-2 z-20">
+                <ul class="hidden absolute group-hover:block w-44 bg-neutral-800 py-2 z-20">
                     <?php foreach ($gameCategories as $cat): ?>
                         <li>
-                            <a href="category.php?id=<?= $cat['category_id'] ?>&type=games" class="block px-4 py-2 hover:bg-neutral-700">
+                            <a href="category.php?id=<?= $cat['category_id'] ?>&type=games" class="block px-4 py-2 hover:text-sky-600">
                                 <?= htmlspecialchars($cat['name']) ?>
                             </a>
                         </li>
@@ -64,15 +64,15 @@ $movieCategories = $pdo
             <!-- Пункт Синематограф -->
             <div class="relative group">
                 <button class="submenu-button flex items-center space-x-1 focus:outline-none">
-                    <span>Синематограф</span>
+                    <span class="hover:text-sky-600">Синематограф</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <ul class="submenu hidden group-hover:block absolute right-0 mt-2 w-44 bg-neutral-800 shadow-lg rounded py-2 z-20">
+                <ul class="hidden absolute group-hover:block w-44 bg-neutral-800 py-2 z-20">
                     <?php foreach ($movieCategories as $cat): ?>
                         <li>
-                            <a href="category.php?id=<?= $cat['category_id'] ?>&type=movies" class="block px-4 py-2 hover:bg-neutral-700">
+                            <a href="category.php?id=<?= $cat['category_id'] ?>&type=movies" class="block px-4 py-2 hover:hover:text-sky-600">
                                 <?= htmlspecialchars($cat['name']) ?>
                             </a>
                         </li>
@@ -80,15 +80,15 @@ $movieCategories = $pdo
                 </ul>
             </div>
 
-            <a href="contact.php" class="hover:text-sky-600">Контакты</a>
-            <a href="about.php" class="hover:text-sky-600">О нас</a>
+            <a href="info.php" class="hover:text-sky-600">Инфо</a>
+            <a href="rss.php" class="hover:text-sky-600">RSS</a>
         </nav>
     </div>
 
     <!-- Мобильное меню -->
     <nav id="mobile-menu" class="hidden bg-neutral-900 border-t border-neutral-800 md:hidden">
         <ul class="flex flex-col space-y-2 p-4">
-            <li><a href="index.php" class="block px-4 py-2 hover:bg-neutral-700 rounded">Главная</a></li>
+            <li><a href="index.php" class="block px-4 py-2 hover:bg-neutral-700">Главная</a></li>
 
             <!-- Мобильный пункт Видеоигры -->
             <li>
@@ -101,7 +101,7 @@ $movieCategories = $pdo
                 <ul class="submenu hidden flex flex-col pl-4 mt-2 space-y-1">
                     <?php foreach ($gameCategories as $cat): ?>
                         <li>
-                            <a href="category.php?id=<?= $cat['category_id'] ?>&type=games" class="block px-2 py-1 hover:bg-neutral-700 rounded">
+                            <a href="category.php?id=<?= $cat['category_id'] ?>&type=games" class="block px-2 py-1 hover:bg-neutral-700">
                                 <?= htmlspecialchars($cat['name']) ?>
                             </a>
                         </li>
@@ -120,7 +120,7 @@ $movieCategories = $pdo
                 <ul class="submenu hidden flex flex-col pl-4 mt-2 space-y-1">
                     <?php foreach ($movieCategories as $cat): ?>
                         <li>
-                            <a href="category.php?id=<?= $cat['category_id'] ?>&type=movies" class="block px-2 py-1 hover:bg-neutral-700 rounded">
+                            <a href="category.php?id=<?= $cat['category_id'] ?>&type=movies" class="block px-2 py-1 hover:bg-neutral-700">
                                 <?= htmlspecialchars($cat['name']) ?>
                             </a>
                         </li>
@@ -128,11 +128,10 @@ $movieCategories = $pdo
                 </ul>
             </li>
 
-            <li><a href="contact.php" class="block px-4 py-2 hover:bg-neutral-700 rounded">Контакты</a></li>
-            <li><a href="about.php" class="block px-4 py-2 hover:bg-neutral-700 rounded">О нас</a></li>
+            <li><a href="info.php" class="block px-4 py-2">Информация</a></li>
+            <li><a href="rss.php" class="block px-4 py-2">RSS</a></li>
         </ul>
     </nav>
 </header>
 
 <main class="flex-1 flex flex-col md:flex-row max-w-[912px] w-full mx-auto px-4 py-8 md:space-x-8">
-    <!-- Контент страницы -->
