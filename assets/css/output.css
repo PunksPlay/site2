@@ -563,9 +563,6 @@
   .bg-gray-100 {
     background-color: var(--color-gray-100);
   }
-  .bg-gray-200 {
-    background-color: var(--color-gray-200);
-  }
   .bg-gray-600 {
     background-color: var(--color-gray-600);
   }
@@ -707,9 +704,6 @@
   }
   .text-green-400 {
     color: var(--color-green-400);
-  }
-  .text-inherit {
-    color: inherit;
   }
   .text-neutral-100 {
     color: var(--color-neutral-100);
@@ -995,6 +989,30 @@ button:hover {
 }
 .c-log {
   cursor: default;
+}
+blockquote {
+  padding: 0.5em 1em;
+  font-style: italic;
+  color: #ccc;
+  position: relative;
+  text-align: center;
+}
+blockquote:before, blockquote:after {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 1px;
+  background-color: #777;
+  margin: 0.5em auto;
+}
+figure {
+  margin: 1.5em 0;
+  text-align: center;
+}
+figcaption {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  color: #aaa;
 }
 @property --tw-space-y-reverse {
   syntax: "*";

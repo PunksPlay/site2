@@ -24,3 +24,32 @@ button:hover {
 .c-log {
     cursor: default;
 }
+/* Убираем длинные линии */
+blockquote {
+    /*margin: 1.5em 0;*/
+    padding: 0.5em 1em;
+    font-style: italic;
+    color: #ccc;
+    position: relative;
+    text-align: center;
+}
+
+/* Псевдо-элементы рисуют только короткие полоски */
+blockquote:before,
+blockquote:after {
+    content: "";
+    display: block;
+    width: 70%;
+    height: 1px;
+    background-color: #777;
+    margin: 0.5em auto;
+}
+figure {
+    margin: 1.5em 0;
+    text-align: center;
+}
+figcaption {
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    color: #aaa;
+}

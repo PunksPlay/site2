@@ -45,7 +45,7 @@ include '../templates/header.php';
 
         <div class="block border-b border-neutral-800 mt-5 mb-7"></div>
 
-        <div class="article-content leading-relaxed text-neutral-100 mb-4 mx-20">
+        <div class="leading-relaxed text-neutral-100 mb-4 mx-20">
             <?= htmlspecialchars_decode($article['full_text'], ENT_QUOTES); ?>
         </div>
 
